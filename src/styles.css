@@ -1,0 +1,564 @@
+:root {
+  color-scheme: dark;
+  --ink: #efe7d6;
+  --muted: #b9ad98;
+  --paper: rgba(42, 35, 27, 0.72);
+  --paper-strong: rgba(24, 22, 20, 0.86);
+  --line: rgba(238, 220, 181, 0.22);
+  --lamp: rgba(218, 169, 92, 0.28);
+  --cold: rgba(72, 92, 113, 0.36);
+  --danger: rgba(116, 42, 33, 0.28);
+  --shadow: rgba(0, 0, 0, 0.58);
+  font-family: Georgia, "Noto Serif Armenian", "Times New Roman", serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  background: #101214;
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+button {
+  font: inherit;
+}
+
+.game {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: clamp(1rem, 3vw, 2.4rem);
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.game::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -4;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.02);
+  transition: filter 400ms ease, transform 400ms ease;
+}
+
+.game::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(90deg, rgba(7, 8, 9, 0.82) 0%, rgba(10, 10, 11, 0.56) 38%, rgba(8, 10, 12, 0.26) 68%, rgba(5, 6, 7, 0.46) 100%),
+    radial-gradient(circle at 23% 72%, rgba(225, 179, 104, 0.12), transparent 34%),
+    radial-gradient(circle at 84% 16%, rgba(86, 104, 122, 0.28), transparent 42%);
+  pointer-events: none;
+}
+
+.bg-office::before {
+  background:
+    radial-gradient(circle at 25% 70%, rgba(198, 140, 62, 0.22), transparent 22%),
+    linear-gradient(115deg, #161513 0%, #25231e 38%, #171b1f 65%, #0b0d10 100%);
+}
+
+.bg-interrogation::before {
+  background:
+    radial-gradient(circle at 34% 30%, rgba(218, 191, 132, 0.18), transparent 20%),
+    linear-gradient(120deg, #141516 0%, #1c2024 42%, #111315 66%, #070808 100%);
+}
+
+.bg-general::before {
+  background:
+    radial-gradient(circle at 18% 22%, rgba(180, 146, 74, 0.12), transparent 20%),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.025), rgba(255,255,255,0.025) 1px, transparent 1px, transparent 14px),
+    linear-gradient(120deg, #14110e 0%, #24211c 40%, #171a1c 72%, #090b0d 100%);
+}
+
+.bg-report::before {
+  background:
+    radial-gradient(circle at 28% 66%, rgba(232, 201, 142, 0.2), transparent 28%),
+    linear-gradient(120deg, #191510 0%, #30281d 35%, #17191b 72%, #090909 100%);
+}
+
+.bg-court::before {
+  background:
+    radial-gradient(circle at 72% 22%, rgba(103, 123, 140, 0.2), transparent 26%),
+    linear-gradient(115deg, #121417 0%, #20252a 40%, #181410 68%, #090909 100%);
+}
+
+.bg-ending::before {
+  background:
+    radial-gradient(circle at 48% 38%, rgba(190, 157, 91, 0.15), transparent 26%),
+    linear-gradient(120deg, #111315 0%, #1a1916 45%, #0b0d0f 100%);
+}
+
+.atmosphere {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(circle at center, transparent 35%, rgba(0, 0, 0, 0.45) 100%),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.24), transparent 35%);
+  pointer-events: none;
+}
+
+.highSuspicion::after {
+  background:
+    linear-gradient(90deg, rgba(6, 7, 8, 0.9) 0%, rgba(12, 12, 13, 0.68) 44%, rgba(8, 10, 12, 0.33) 72%, rgba(5, 6, 7, 0.55) 100%),
+    radial-gradient(circle at 82% 16%, rgba(113, 44, 39, 0.24), transparent 34%);
+}
+
+.highShame::before {
+  filter: blur(1.5px) saturate(0.78);
+}
+
+.coldAuthority .sceneText,
+.coldAuthority .innerThought {
+  text-shadow: 0 0 16px rgba(210, 228, 247, 0.08);
+}
+
+.breaking::before {
+  transform: scale(1.035) rotate(-0.2deg);
+  filter: contrast(1.1) saturate(0.75);
+}
+
+.breaking .narrativePanel {
+  border-color: rgba(156, 60, 44, 0.34);
+  box-shadow: 0 26px 80px rgba(0, 0, 0, 0.58), 0 0 0 1px rgba(156, 60, 44, 0.18) inset;
+}
+
+.laughterFragments {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  color: rgba(236, 218, 187, 0.12);
+  font-size: clamp(1.2rem, 4vw, 3.4rem);
+  letter-spacing: 0.08em;
+}
+
+.laughterFragments span {
+  position: absolute;
+  filter: blur(0.5px);
+}
+
+.laughterFragments span:nth-child(1) {
+  top: 18%;
+  right: 14%;
+}
+
+.laughterFragments span:nth-child(2) {
+  top: 52%;
+  right: 25%;
+}
+
+.laughterFragments span:nth-child(3) {
+  bottom: 18%;
+  right: 8%;
+}
+
+.narrativePanel,
+.startCard,
+.endingCard {
+  position: relative;
+  z-index: 1;
+  width: min(760px, 100%);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(50, 43, 34, 0.78), rgba(17, 18, 19, 0.88)),
+    var(--paper);
+  box-shadow: 0 28px 90px var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+}
+
+.narrativePanel {
+  padding: clamp(1.05rem, 2.6vw, 2rem);
+  margin-right: auto;
+}
+
+.startScreen,
+.endingScreen {
+  align-items: center;
+  justify-content: center;
+}
+
+.startScreen::after,
+.endingScreen::after {
+  background:
+    linear-gradient(90deg, rgba(7, 8, 9, 0.76), rgba(8, 9, 10, 0.52)),
+    radial-gradient(circle at center, rgba(218, 169, 92, 0.12), transparent 44%);
+}
+
+.startCard,
+.endingCard {
+  padding: clamp(1.4rem, 4vw, 3rem);
+  text-align: left;
+}
+
+.eyebrow {
+  margin: 0 0 0.7rem;
+  color: var(--muted);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: clamp(0.72rem, 1vw, 0.82rem);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+.startCard h1,
+.endingCard h1,
+.narrativePanel h1 {
+  margin: 0;
+  color: #fff4dc;
+  font-size: clamp(2rem, 7vw, 4.8rem);
+  line-height: 0.95;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+
+.narrativePanel h1 {
+  margin-bottom: 1rem;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+}
+
+.startText,
+.startNote,
+.endingCard p,
+.sceneText,
+.innerThought,
+.pressureText,
+.consequenceBox p {
+  font-size: clamp(1rem, 1.7vw, 1.17rem);
+  line-height: 1.72;
+}
+
+.startText,
+.endingCard p,
+.sceneText {
+  color: rgba(255, 247, 230, 0.92);
+}
+
+.startNote {
+  color: var(--muted);
+  border-left: 2px solid rgba(223, 186, 119, 0.42);
+  padding-left: 1rem;
+}
+
+.sceneMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  justify-content: space-between;
+  margin-bottom: 0.9rem;
+  color: var(--muted);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: clamp(0.72rem, 1vw, 0.82rem);
+  letter-spacing: 0.04em;
+}
+
+.innerThought {
+  margin: 1rem 0;
+  padding: 0.95rem 1rem;
+  color: #e8d4ae;
+  background: rgba(218, 169, 92, 0.08);
+  border-left: 2px solid rgba(218, 169, 92, 0.42);
+  border-radius: 14px;
+}
+
+.innerThought span {
+  color: #f6dfae;
+  font-weight: 700;
+}
+
+.pressureText {
+  margin: 1rem 0;
+  color: rgba(226, 202, 181, 0.8);
+  font-style: italic;
+  letter-spacing: 0.02em;
+}
+
+.consequenceBox {
+  margin: 1rem 0;
+  padding: 0.8rem 0.95rem;
+  border-radius: 16px;
+  background: rgba(9, 10, 11, 0.34);
+  border: 1px solid rgba(238, 220, 181, 0.12);
+}
+
+.consequenceBox p {
+  margin: 0;
+  color: rgba(239, 231, 214, 0.85);
+}
+
+.consequenceBox small {
+  display: block;
+  margin-top: 0.35rem;
+  color: rgba(190, 177, 151, 0.8);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.choices {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1.1rem;
+}
+
+.choices button,
+.primaryButton,
+.panelFooter button {
+  border: 1px solid rgba(237, 220, 181, 0.22);
+  border-radius: 16px;
+  color: var(--ink);
+  background: rgba(26, 29, 31, 0.68);
+  cursor: pointer;
+  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+}
+
+.choices button {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  text-align: left;
+  line-height: 1.45;
+  font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+}
+
+.choices button:hover,
+.primaryButton:hover,
+.panelFooter button:hover {
+  transform: translateY(-1px);
+  border-color: rgba(236, 207, 147, 0.48);
+  background: rgba(49, 43, 34, 0.78);
+}
+
+.choices button:active,
+.primaryButton:active,
+.panelFooter button:active {
+  transform: translateY(0);
+}
+
+.primaryButton {
+  margin-top: 1.15rem;
+  padding: 0.95rem 1.25rem;
+  background: linear-gradient(180deg, rgba(141, 100, 52, 0.84), rgba(82, 60, 39, 0.86));
+  border-color: rgba(246, 212, 143, 0.36);
+  font-weight: 700;
+}
+
+.panelFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(238, 220, 181, 0.12);
+  color: var(--muted);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.86rem;
+}
+
+.panelFooter button {
+  padding: 0.45rem 0.75rem;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.statsPanel {
+  position: absolute;
+  z-index: 2;
+  top: clamp(1rem, 3vw, 2rem);
+  right: clamp(1rem, 3vw, 2rem);
+  width: min(310px, calc(100vw - 2rem));
+  padding: 0.85rem;
+  border: 1px solid rgba(238, 220, 181, 0.16);
+  border-radius: 18px;
+  background: rgba(12, 14, 15, 0.58);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.25);
+}
+
+.compactStat {
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+  align-items: center;
+  gap: 0.65rem;
+  margin: 0.42rem 0;
+  color: rgba(239, 231, 214, 0.78);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.78rem;
+}
+
+.compactStat::after {
+  content: "";
+  display: block;
+  height: 5px;
+  grid-column: 2;
+  grid-row: 1;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.compactStat i {
+  display: block;
+  height: 5px;
+  grid-column: 2;
+  grid-row: 1;
+  border-radius: 99px;
+  background: linear-gradient(90deg, rgba(208, 173, 105, 0.74), rgba(132, 157, 177, 0.72));
+  z-index: 1;
+}
+
+.endingCard h2 {
+  margin: 0.7rem 0 1.2rem;
+  color: #d9c59d;
+  font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+  font-weight: 400;
+}
+
+.finalStats {
+  margin: 1.4rem 0 0.4rem;
+  padding: 1rem;
+  border: 1px solid rgba(238, 220, 181, 0.14);
+  border-radius: 18px;
+  background: rgba(9, 10, 11, 0.3);
+}
+
+.statLine {
+  display: grid;
+  grid-template-columns: minmax(6.5rem, 9rem) 1fr 2rem;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 0.55rem 0;
+  color: rgba(239, 231, 214, 0.86);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.statLine meter {
+  width: 100%;
+  height: 0.8rem;
+}
+
+.statLine strong {
+  color: #f4dca6;
+  font-weight: 700;
+}
+
+@media (min-width: 960px) {
+  .narrativePanel {
+    margin-left: clamp(0rem, 3vw, 3rem);
+    margin-bottom: clamp(0rem, 2vw, 1rem);
+  }
+}
+
+@media (max-width: 760px) {
+  .game {
+    align-items: flex-end;
+    padding: 0.75rem;
+    padding-top: 8.2rem;
+  }
+
+  .game::after {
+    background:
+      linear-gradient(180deg, rgba(7, 8, 9, 0.24) 0%, rgba(7, 8, 9, 0.46) 28%, rgba(7, 8, 9, 0.84) 100%),
+      radial-gradient(circle at 70% 15%, rgba(95, 116, 132, 0.25), transparent 40%);
+  }
+
+  .narrativePanel,
+  .startCard,
+  .endingCard {
+    border-radius: 20px;
+    backdrop-filter: blur(8px);
+  }
+
+  .narrativePanel {
+    padding: 1rem;
+    max-height: calc(100svh - 9rem);
+    overflow-y: auto;
+  }
+
+  .statsPanel {
+    left: 0.75rem;
+    right: 0.75rem;
+    top: 0.75rem;
+    width: auto;
+    padding: 0.65rem;
+  }
+
+  .compactStat {
+    grid-template-columns: 6.4rem 1fr;
+    margin: 0.32rem 0;
+    font-size: 0.72rem;
+  }
+
+  .choices {
+    gap: 0.58rem;
+  }
+
+  .choices button {
+    padding: 0.78rem 0.82rem;
+    border-radius: 14px;
+  }
+
+  .sceneText,
+  .innerThought,
+  .pressureText,
+  .consequenceBox p {
+    line-height: 1.62;
+  }
+
+  .laughterFragments span:nth-child(1) {
+    top: 14%;
+    right: 8%;
+  }
+
+  .laughterFragments span:nth-child(2) {
+    display: none;
+  }
+
+  .laughterFragments span:nth-child(3) {
+    bottom: 48%;
+    right: 8%;
+  }
+}
+
+@media (max-width: 420px) {
+  .game {
+    padding-left: 0.55rem;
+    padding-right: 0.55rem;
+  }
+
+  .narrativePanel {
+    padding: 0.9rem;
+  }
+
+  .sceneMeta {
+    display: block;
+  }
+
+  .sceneMeta span {
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+
+  .statLine {
+    grid-template-columns: 1fr;
+    gap: 0.3rem;
+  }
+
+  .statLine strong {
+    display: none;
+  }
+}
